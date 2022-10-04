@@ -1,0 +1,64 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Employee {
+  id: Int!
+  name: String!
+  salary: Float!
+  currency: String!
+  department: String!
+  subDepartment: String
+  onContract: Boolean
+  user: User!
+}
+
+type User {
+  id: Int!
+  email: String!
+  password: String!
+  employees: [Employee!]!
+}
+
+type JwtPayloadDto {
+  accessToken: String!
+}
+
+type SsDto {
+  department: String
+  sub_department: String
+  min: String!
+  max: String!
+  mean: String!
+}
+
+type Query {
+  findSS(type: SsType): [SsDto!]!
+}
+
+enum SsType {
+  onContract
+  eachDepartment
+  nestedDepartments
+}
+
+type Mutation {
+  signUp(authCredentialsDto: AuthCredentialsDto!): JwtPayloadDto!
+  signIn(authCredentialsDto: AuthCredentialsDto!): JwtPayloadDto!
+  createEmployee(createEmployeeDto: CreateEmployeeDto!): Employee!
+  removeEmployee(id: Int!): String!
+}
+
+input AuthCredentialsDto {
+  email: String!
+  password: String!
+  name: String
+}
+
+input CreateEmployeeDto {
+  name: String!
+  salary: Float!
+  currency: String!
+  department: String!
+  subDepartment: String!
+}
